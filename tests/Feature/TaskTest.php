@@ -22,8 +22,6 @@ class TaskTest extends TestCase
     /** @test */
     public function it_can_store_a_task()
     {
-        $this->withoutExceptionHandling();
-
         $taskData = [
             'name' => 'Test task',
             'completed' => false
@@ -37,8 +35,6 @@ class TaskTest extends TestCase
     /** @test */
     public function it_can_edit_a_task()
     {
-        $this->withoutExceptionHandling();
-
         $task = Task::factory()->create();
         $taskData = [
             'name' => 'Test task',
@@ -52,8 +48,6 @@ class TaskTest extends TestCase
     /** @test */
     public function it_can_delete_a_task()
     {
-        $this->withoutExceptionHandling();
-
         $task = Task::factory()->create();
 
         $this->deleteJson(route('tasks.destroy', $task));
@@ -63,7 +57,6 @@ class TaskTest extends TestCase
     /** @test */
     public function it_can_toggle_a_task_as_completed()
     {
-        $this->withoutExceptionHandling();
         $task = Task::factory()->create([
             'completed' => false
         ]);
