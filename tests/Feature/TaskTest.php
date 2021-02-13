@@ -13,11 +13,10 @@ class TaskTest extends TestCase
     /** @test */
     public function it_can_show_all_tasks()
     {
-        $this->withoutExceptionHandling();
-
         $tasks = Task::factory()->count(5)->create();
 
-        $this->getJson(route('task.index'))->assertJson($tasks);
+        $this->getJson(route('task.index'))
+            ->assertJson($tasks->toArray());
     }
 
     /** @test */
