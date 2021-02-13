@@ -5,15 +5,14 @@ namespace App\Http\Requests\Task;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTaskRequest extends FormRequest
+class ToggleTaskRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
-            'name' => [
+            'completed' => [
                 'required',
-                'string',
-                'max:255',
+                'boolean',
             ]
         ];
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\ToggleTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use Illuminate\Support\Collection;
 
@@ -33,5 +34,11 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         return $task->delete();
+    }
+
+    public function toggleComplete(ToggleTaskRequest $request, Task $task)
+    {
+        $attributes = $request->validated();
+        return $task->update($attributes);
     }
 }

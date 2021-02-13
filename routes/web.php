@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::patch('task/toggle/{task}', [TaskController::class, 'toggleComplete'])->name('task.toggle.complete');
 Route::resource('task', TaskController::class)
     ->except('create', 'show', 'edit');
 

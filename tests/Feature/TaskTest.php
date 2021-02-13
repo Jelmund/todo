@@ -61,17 +61,16 @@ class TaskTest extends TestCase
     }
 
     /** @test */
-    public function it_can_toggle_a_task_its_status()
+    public function it_can_toggle_a_task_as_completed()
     {
         $this->withoutExceptionHandling();
-
         $task = Task::factory()->create([
             'completed' => false
         ]);
 
-        $this->putJson(route('task.toggle.complete', $task), [
-            'completed' => true
-        ])->assertOk();
+        $this->patchJson(route('task.toggle.complete', $task), [
+            'completed' => 1
+        ]);
 
         $this->assertDatabaseHas('tasks', [
             'name' => $task['name'],
