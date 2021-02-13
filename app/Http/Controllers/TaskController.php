@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Task\StoreTaskRequest;
+use App\Http\Requests\Task\UpdateTaskRequest;
 use Illuminate\Support\Collection;
 
 use App\Models\Task;
@@ -19,6 +20,13 @@ class TaskController extends Controller
     {
         $attributes = $request->validated();
 
-        Task::create($attributes);
+        return Task::create($attributes);
+    }
+
+    public function update(UpdateTaskRequest $request, Task $task)
+    {
+        $attributes = $request->validated();
+
+        return $task->update($attributes);
     }
 }

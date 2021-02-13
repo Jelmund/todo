@@ -30,7 +30,7 @@ class TaskTest extends TestCase
         ];
 
         $this->postJson(route('task.store'), $taskData)
-            ->assertOk();
+            ->assertCreated();
         $this->assertDatabaseHas('tasks', $taskData);
     }
 
@@ -44,7 +44,7 @@ class TaskTest extends TestCase
             'name' => 'Test task',
         ];
 
-        $this->putJson(route('task.store', $task), $taskData)
+        $this->patchJson(route('task.update', $task), $taskData)
             ->assertOk();
         $this->assertDatabaseHas('tasks', $taskData);
     }
