@@ -15,7 +15,7 @@ class TaskTest extends TestCase
     {
         $tasks = Task::factory()->count(5)->create();
 
-        $this->getJson(route('task.index'))
+        $this->getJson(route('tasks.index'))
             ->assertJson($tasks->toArray());
     }
 
@@ -29,7 +29,7 @@ class TaskTest extends TestCase
             'completed' => false
         ];
 
-        $this->postJson(route('task.store'), $taskData)
+        $this->postJson(route('tasks.store'), $taskData)
             ->assertCreated();
         $this->assertDatabaseHas('tasks', $taskData);
     }
@@ -44,7 +44,7 @@ class TaskTest extends TestCase
             'name' => 'Test task',
         ];
 
-        $this->patchJson(route('task.update', $task), $taskData)
+        $this->patchJson(route('tasks.update', $task), $taskData)
             ->assertOk();
         $this->assertDatabaseHas('tasks', $taskData);
     }
@@ -56,7 +56,7 @@ class TaskTest extends TestCase
 
         $task = Task::factory()->create();
 
-        $this->deleteJson(route('task.destroy', $task));
+        $this->deleteJson(route('tasks.destroy', $task));
         $this->assertDeleted($task);
     }
 
@@ -68,7 +68,7 @@ class TaskTest extends TestCase
             'completed' => false
         ]);
 
-        $this->patchJson(route('task.toggle.complete', $task), [
+        $this->patchJson(route('tasks.toggle.complete', $task), [
             'completed' => 1
         ]);
 
