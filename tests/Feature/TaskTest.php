@@ -11,6 +11,16 @@ class TaskTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
+    public function it_can_show_all_tasks()
+    {
+        $this->withoutExceptionHandling();
+
+        $tasks = Task::factory()->count(5)->create();
+
+        $this->getJson(route('task.index'))->assertJson($tasks);
+    }
+
+    /** @test */
     public function it_can_store_a_task()
     {
         $this->withoutExceptionHandling();
@@ -69,15 +79,5 @@ class TaskTest extends TestCase
             'name' => $task['name'],
             'completed' => true
         ]);
-    }
-
-    /** @test */
-    public function it_can_show_all_tasks()
-    {
-        $this->withoutExceptionHandling();
-
-        $tasks = Task::factory()->count(5)->create();
-
-        $this->getJson(route('task.index'))->assertJson($tasks);
     }
 }
