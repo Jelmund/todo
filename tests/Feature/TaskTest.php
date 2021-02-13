@@ -56,9 +56,8 @@ class TaskTest extends TestCase
 
         $task = Task::factory()->create();
 
-        $this->deleteJson('tasks.delete', $task)
-            ->assertOk();
-        $this->assertDatabaseMissing('tasks', $task);
+        $this->deleteJson(route('task.destroy', $task));
+        $this->assertDeleted($task);
     }
 
     /** @test */

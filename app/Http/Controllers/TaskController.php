@@ -29,4 +29,9 @@ class TaskController extends Controller
 
         return $task->update($attributes);
     }
+
+    public function destroy(Task $task)
+    {
+        return $task->delete();
+    }
 }
