@@ -2,18 +2,43 @@
     <div class="taskListContainer">
         <div class="heading">
             <h2 id="title">Task list</h2>
-            <add-task-form></add-task-form>
+            <add-task-form
+                v-on:reloadList="getTasks()"
+            />
         </div>
-        <list-view></list-view>
+        <list-view
+            :tasks="tasks"
+            v-on:reloadList="getTasks()"
+        />
     </div>
 </template>
 <script>
-import addTaskForm from "./addTaskForm";
-import listView from "./listView";
+import axios from 'axios';
+import addTaskForm from './addTaskForm';
+import listView from './listView';
 export default {
     components: {
         addTaskForm,
         listView
+    },
+    data: function() {
+        return {
+            tasks: []
+        }
+    },
+    methods: {
+        getTasks () {
+            axios.get('http://takenlijst.test/tasks')
+            .then(response => {
+                this.tasks = response.data
+            })
+            .catch( error => {
+                console.log(error);
+            })
+        }
+    },
+    created() {
+        this.getTasks();
     }
 }
 </script>
