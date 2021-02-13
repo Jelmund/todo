@@ -30,7 +30,7 @@ class TaskTest extends TestCase
         ];
 
         $this->postJson(route('task.store'), $taskData)
-            ->assertCreated();
+            ->assertOk();
         $this->assertDatabaseHas('tasks', $taskData);
     }
 
