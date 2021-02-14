@@ -17,28 +17,29 @@ class TaskController extends Controller
         return Task::all();
     }
 
-    public function store(StoreTaskRequest $request)
+    public function store(StoreTaskRequest $request): Task
     {
         $attributes = $request->validated();
 
         return Task::create($attributes);
     }
 
-    public function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task): bool
     {
         $attributes = $request->validated();
 
         return $task->update($attributes);
     }
 
-    public function destroy(Task $task)
+    public function destroy(Task $task): bool
     {
         return $task->delete();
     }
 
-    public function toggleComplete(ToggleTaskRequest $request, Task $task)
+    public function toggleComplete(ToggleTaskRequest $request, Task $task): bool
     {
         $attributes = $request->validated();
+
         return $task->update($attributes);
     }
 }

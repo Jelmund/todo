@@ -7,6 +7,7 @@
 
 <script>
 import axios from 'axios'
+
 export default {
     data: function () {
         return {
@@ -20,18 +21,18 @@ export default {
             if (!this.task.name) {
                 return;
             }
-            axios.post('http://takenlijst.test/tasks', {
+            axios.post('tasks', {
                 name: this.task.name
             })
-            .then(response => {
-                if ( response.status === 201 ) {
-                    this.task.name = ''
-                    this.$emit('reloadList');
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
+                .then(response => {
+                    if (response.status === 201) {
+                        this.task.name = ''
+                        this.$emit('reloadList');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                })
         }
     }
 }

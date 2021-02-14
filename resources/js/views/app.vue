@@ -14,28 +14,30 @@
 </template>
 <script>
 import axios from 'axios';
-import addTaskForm from './addTaskForm';
-import listView from './listView';
+import addTaskForm from './tasks/add-task-form';
+import listView from './tasks/task-list';
+
 export default {
     components: {
         addTaskForm,
         listView
     },
-    data: function() {
+    data: function () {
         return {
             tasks: []
         }
     },
     methods: {
-        getTasks () {
-            axios.get('http://takenlijst.test/tasks')
-            .then(response => {
-                this.tasks = response.data
-            })
-            .catch( error => {
-                console.log(error);
-            })
-        }
+        getTasks() {
+            axios.get('tasks')
+                .then(response => {
+                    this.tasks = response.data
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+
     },
     created() {
         this.getTasks();

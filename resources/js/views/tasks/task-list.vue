@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import listTask from './listTask';
+import listTask from './task';
 
 export default {
     props: ['tasks'],
